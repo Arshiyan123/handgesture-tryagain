@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 230 25% 7%;
+    --foreground: 210 40% 94%;
+
+    --card: 230 20% 11%;
+    --card-foreground: 210 40% 94%;
+
+    --popover: 230 20% 11%;
+    --popover-foreground: 210 40% 94%;
+
+    --primary: 160 100% 50%;
+    --primary-foreground: 230 25% 7%;
+
+    --secondary: 280 100% 65%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 230 15% 18%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 200 100% 55%;
+    --accent-foreground: 230 25% 7%;
+
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 230 15% 20%;
+    --input: 230 15% 20%;
+    --ring: 160 100% 50%;
+
+    --radius: 0.75rem;
+
+    --neon-glow: 160 100% 50%;
+    --neon-purple: 280 100% 65%;
+    --neon-blue: 200 100% 55%;
+    --neon-pink: 330 100% 60%;
+
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+
+    --sidebar-background: 230 20% 9%;
+    --sidebar-foreground: 210 40% 94%;
+    --sidebar-primary: 160 100% 50%;
+    --sidebar-primary-foreground: 230 25% 7%;
+    --sidebar-accent: 230 15% 15%;
+    --sidebar-accent-foreground: 210 40% 94%;
+    --sidebar-border: 230 15% 20%;
+    --sidebar-ring: 160 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .neon-text {
+    text-shadow: 0 0 7px hsl(var(--neon-glow) / 0.8),
+                 0 0 20px hsl(var(--neon-glow) / 0.5),
+                 0 0 42px hsl(var(--neon-glow) / 0.3);
+  }
+
+  .neon-text-purple {
+    text-shadow: 0 0 7px hsl(var(--neon-purple) / 0.8),
+                 0 0 20px hsl(var(--neon-purple) / 0.5),
+                 0 0 42px hsl(var(--neon-purple) / 0.3);
+  }
+
+  .neon-border {
+    box-shadow: 0 0 5px hsl(var(--neon-glow) / 0.5),
+                0 0 15px hsl(var(--neon-glow) / 0.2),
+                inset 0 0 5px hsl(var(--neon-glow) / 0.1);
+  }
+
+  .neon-border-purple {
+    box-shadow: 0 0 5px hsl(var(--neon-purple) / 0.5),
+                0 0 15px hsl(var(--neon-purple) / 0.2),
+                inset 0 0 5px hsl(var(--neon-purple) / 0.1);
+  }
+
+  .game-card-hover {
+    @apply transition-all duration-300;
+  }
+  .game-card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 0 20px hsl(var(--neon-glow) / 0.4),
+                0 0 40px hsl(var(--neon-glow) / 0.15),
+                0 20px 40px hsl(230 25% 0% / 0.5);
+  }
+
+  .scanline {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(var(--neon-glow) / 0.03) 2px,
+      hsl(var(--neon-glow) / 0.03) 4px
+    );
+  }
+
+  .grid-bg {
+    background-image: 
+      linear-gradient(hsl(var(--neon-glow) / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--neon-glow) / 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
