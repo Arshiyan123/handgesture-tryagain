@@ -124,9 +124,9 @@ export function useHandTracking({ enabled = true, onFrame }: UseHandTrackingOpti
             },
             runningMode: 'VIDEO',
             numHands: 1,
-            minHandDetectionConfidence: 0.5,
-            minHandPresenceConfidence: 0.5,
-            minTrackingConfidence: 0.5,
+            minHandDetectionConfidence: 0.30,
+            minHandPresenceConfidence: 0.30,
+            minTrackingConfidence: 0.30,
           });
         } catch (gpuErr) {
           console.warn('[HandTracking] GPU failed, trying CPU:', gpuErr);
@@ -138,9 +138,9 @@ export function useHandTracking({ enabled = true, onFrame }: UseHandTrackingOpti
             },
             runningMode: 'VIDEO',
             numHands: 1,
-            minHandDetectionConfidence: 0.5,
-            minHandPresenceConfidence: 0.5,
-            minTrackingConfidence: 0.5,
+            minHandDetectionConfidence: 0.30,
+            minHandPresenceConfidence: 0.30,
+            minTrackingConfidence: 0.30,
           });
         }
 
@@ -197,12 +197,14 @@ export function useHandTracking({ enabled = true, onFrame }: UseHandTrackingOpti
                   fingerCount++;
                 }
               }
+              // Use middle finger tip for more responsive Y tracking
+              const middleTip = landmarks[12];
 
               onFrameRef.current?.({
                 x: 1 - wrist.x,
-                y: wrist.y,
+                y: middleTip.y,
                 isOpen: fingerCount >= 3,
-                isRaised: wrist.y < 0.5,
+                isRaised: wrist.y < 0.55,
                 fingerCount,
               });
             } else {

@@ -1,13 +1,43 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GameCard } from '@/components/GameCard';
 
 export default function GameLibrary() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState<any>(null);
+  useEffect(() => {
+    const stored = localStorage.getItem('neon_current_user');
+    if (!stored) {
+      navigate('/auth');
+      return;
+    }
+    setUser(JSON.parse(stored));
+  }, [navigate]);
+  const handleLogout = () => {
+    localStorage.removeItem('neon_current_user');
+    navigate('/auth');
+  };
+  if (!user) return null;
   return (
     <div className="min-h-screen grid-bg relative">
       <div className="scanline absolute inset-0 pointer-events-none opacity-20" />
-      
+
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-16">
+          <div className="flex justify-end mb-4">
+            <div className="flex items-center gap-3">
+              <span className="font-body text-sm text-muted-foreground">
+                👾 {user.username || user.email}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-1.5 rounded-lg border border-border bg-muted/30 font-display text-xs font-bold tracking-wider text-muted-foreground hover:text-destructive hover:border-destructive/50 transition-all"
+              >
+                LOGOUT
+              </button>
+            </div>
+          </div>
           <h1 className="font-display text-5xl md:text-7xl font-black tracking-tight neon-text text-primary mb-4">
             NEON ARCADE
           </h1>
